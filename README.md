@@ -36,3 +36,5 @@ SORT
 
 DISPLAY
 1. display() - Display the linked list.
+
+clear() - Clears the screen usin C ANSI escape sequences.
