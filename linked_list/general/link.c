@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include "link.h"
 
@@ -18,7 +16,7 @@ int main()
 	{	
 		c = menu();
 
-	}while(c!=14);
+	}while(c!=15);
 }
 
 void print()
@@ -32,11 +30,12 @@ void print()
 	printf("7. Delete a particular node\n");
 	printf("8. Delete a particular value\n");
 	printf("9. Replace a value at a particular node\n");
-	printf("10. Delete all duplicate values\n");
-	printf("11. Display\n");
-	printf("12. Reverse\n");
-	printf("13. Sort(Ascending)\n");
-	printf("14. Quit\n\n");
+	printf("10. Replace a particular value in the list\n");
+	printf("11. Delete all duplicate values\n");
+	printf("12. Display\n");
+	printf("13. Reverse\n");
+	printf("14. Sort(Ascending)\n");
+	printf("15. Quit\n\n");
 }
 
 int menu()
@@ -47,7 +46,7 @@ int menu()
 	
 	print();
 	
-	printf("Select the operation you want to perform (6 to Quit): ");
+	printf("Select the operation you want to perform (14 to Quit): ");
 	scanf("%d",&n);
 	
 		switch(n)
@@ -76,9 +75,11 @@ int menu()
 					insert_at_loc(a,b);
 					break;
 			case 4:
-					printf("Enter the value after which to insert: ");
+					printf("Enter the number you want to insert: ");
 					scanf("%d",&a);
-					insert_after_value(a);
+					printf("Enter the value after which to insert: ");
+					scanf("%d",&b);
+					insert_after_value(a,b);
 					break;
 			case 5:
 					delete_beg();
@@ -105,24 +106,31 @@ int menu()
 			case 9:
 					printf("Enter the location of node you want to replace: ");
 					scanf("%d",&b);
-					printf("Enter the value to replace it with: ");
+					printf("Enter the new number: ");
 					scanf("%d",&a);
 					replace_node(a,b);
 					break;
 			case 10:
+					printf("Enter the value you want to replace: ");
+					scanf("%d",&a);
+					printf("Enter the new number: ");
+					scanf("%d",&b);
+					replace_value(b,a);
+					break;
+			case 11:
 					delete_dup_vals();
 					break;
-			case 11: 
+			case 12: 
 					display();
 					usleep(5000000);
 					break;
-			case 12: 
+			case 13: 
 					reverse();
 					break;
-			case 13:
+			case 14:
 					sortlist();
 					break;
-			case 14:
+			case 15:
 					return n;
 					break;
 		}
@@ -133,39 +141,4 @@ void clear(void)
 	printf("\033[2J");
 	printf("\033[%d;%dH",0,0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

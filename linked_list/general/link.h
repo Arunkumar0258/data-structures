@@ -9,15 +9,16 @@ typedef struct list
 
 list *start=NULL,*node=NULL,*curr=NULL,*prev=NULL;
 
-void insert_beg(int num);
-void insert_end(int num);
-void insert_at_loc(int num,int loc);
-void insert_after_value(int num);
+void insert_beg(int);
+void insert_end(int);
+void insert_at_loc(int,int);
+void insert_after_value(int,int);
 void delete_beg();
 void delete_end();
-void delete_node(int num);
-void delete_value(int num);
-void replace_node(int num, int loc);
+void delete_node(int);
+void delete_value(int);
+void replace_node(int,int);
+void replace_value(int,int);
 void delete_dup_vals();
 void display();
 void reverse();
@@ -94,7 +95,7 @@ void insert_at_loc(int num,int loc)
 	}
 }
 
-void insert_after_value(int num)
+void insert_after_value(int num,int val)
 {
 	if(start == NULL)
 	{
@@ -110,7 +111,7 @@ void insert_after_value(int num)
 		node->next = NULL;
 		
 		curr = start;
-		while(curr != NULL && curr->info != num)
+		while(curr != NULL && curr->info != val)
 		{
 			curr=curr->next;
 		}
@@ -184,6 +185,14 @@ void replace_node(int num, int loc)
 		curr = curr->next;
 		i++;
 	}
+	curr->info = num;
+}
+
+void replace_value(int num, int val)
+{
+	curr = start;
+	while(curr != NULL && curr->info != val)
+		curr = curr->next;
 	curr->info = num;
 }
 
