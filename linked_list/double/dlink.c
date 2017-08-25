@@ -17,7 +17,8 @@ int main()
 		print();
 		n = menu();
 		
-	}while(n!=14);
+	}while(n!=15);
+	clear();
 }
 
 void print()
@@ -33,16 +34,17 @@ void print()
 	printf("9. Replace a particular value with another in a list\n");
 	printf("10. Replace a particular node in the list\n");
 	printf("11. Sort the list in ascending order\n");
-	printf("12. Display\n");
-	printf("13. Display in reverse\n");
-	printf("14. Quit\n");
+	printf("12. Delete all duplicate values and sort\n");
+	printf("13. Display\n");
+	printf("14. Display in reverse\n");
+	printf("15. Quit\n");
 		
 }
 
 int menu()
 {
 	int n,a,b;
-	printf("Select the operation you want to perform (14 to Quit): ");
+	printf("Select the operation you want to perform (15 to Quit): ");
 	scanf("%d",&n);
 	switch(n)
 		{
@@ -104,15 +106,18 @@ int menu()
 					sortlist();
 					break;
 			case 12:
+					delete_dup_vals();
+					break;
+			case 13:
 					display();
 					usleep(5000000);
 					break;
-			case 13:
+			case 14:
 					display_reverse();
 					usleep(5000000);
 					break;
-			case 14:
-					return 14;
+			case 15:
+					return 15;
 		}		
 }
 void clear(void)

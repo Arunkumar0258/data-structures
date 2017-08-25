@@ -12,6 +12,7 @@ void delete_value(int num);
 void replace_value(int num,int val);
 void replace_node(int num, int loc);
 void sortlist();
+void delete_dup_vals();
 int length();
 void display();
 void clear(void);
@@ -69,7 +70,7 @@ void insert_end(int num)
 void insert_at_loc(int num,int loc)
 {
 	int n = length();
-	if(loc > n)
+	if(loc > n || loc < 0)
 	{
 		printf("Location is invalid!!\n");
 		return;
@@ -135,6 +136,12 @@ void insert_after_value(int num, int val)
 
 void delete_beg()
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
 	curr = start;
 	start = start->next;
 	start->prev = NULL;
@@ -143,6 +150,12 @@ void delete_beg()
 
 void delete_end()
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
 	curr = start;
 	while(curr->next != NULL)
 	{
@@ -155,9 +168,15 @@ void delete_end()
 
 void delete_node(int loc)
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
 	int n = length();
 	
-	if(loc > n)
+	if(loc > n || loc < 0)
 	{
 		printf("Location is invalid\n");
 		return;
@@ -178,6 +197,18 @@ void delete_node(int loc)
 
 void delete_value(int num)
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	curr = start;
+	if(start->info == num)
+	{
+		start = start->next;
+		start->prev == NULL;
+		free(curr);
+	}
 	curr = start;
 	while(curr != NULL && curr->info != num)
 	{
@@ -198,16 +229,39 @@ void delete_value(int num)
 
 void replace_value(int num,int val)
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
 	curr = start;
 	while(curr != NULL && curr->info != num)
-	{
 		curr = curr->next;
+		
+	if(curr == NULL)
+	{
+		printf("Value not found! Please try again\n");
+		return;
 	}
 	curr->info = val;
 }
 
 void replace_node(int loc, int num)
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
+	int n = length();
+	
+	if(loc > n || loc < 0)
+	{
+		printf("Location is invalid!! Try again\n");
+		return;
+	}
 	curr = start;
 	int i = 1;
 	while(curr != NULL && i<loc)
@@ -220,6 +274,12 @@ void replace_node(int loc, int num)
 
 void sortlist()
 {
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+
 	for(curr=start;curr!= NULL;curr=curr->next)
 	{
 		for(pre=curr->next; pre!=NULL; pre=pre->next)
@@ -234,8 +294,35 @@ void sortlist()
 	}
 }
 
+void delete_dup_vals()
+{
+	if(start == NULL)
+	{
+		printf("List is empty\n");
+		return;
+	}
+	
+	sortlist();
+	curr = start;
+	
+	while(curr->next != NULL)
+	{
+		if(curr->info == curr->next->info)
+		{
+			pre = curr->next->next;
+			free(curr->next);
+			curr->next = pre;
+			pre->prev = curr;
+		}
+		else
+			curr = curr->next;
+	}
+}
+
 int length()
 {
+	if(start == NULL)
+		return 0;
 	int i = 1;
 	curr = start;
 	while(curr != NULL)
@@ -248,6 +335,11 @@ int length()
 
 void display()
 {
+	if(start == NULL)
+	{
+		printf("The list is empty\n");
+		return;
+	}
 	curr = start;
 	while(curr != NULL)
 	{
@@ -258,6 +350,11 @@ void display()
 
 void display_reverse()
 {
+	if(start == NULL)
+	{
+		printf("The list is empty\n");
+		return;
+	}
 	curr = start;
 	while(curr->next != NULL)
 		curr = curr->next;
