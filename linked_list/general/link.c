@@ -15,7 +15,6 @@ int main()
 	do
 	{	
 		c = menu();
-
 	}while(c!=15);
 }
 
@@ -46,7 +45,7 @@ int menu()
 	
 	print();
 	
-	printf("Select the operation you want to perform (14 to Quit): ");
+	printf("Select the operation you want to perform (15 to Quit): ");
 	scanf("%d",&n);
 	
 		switch(n)
