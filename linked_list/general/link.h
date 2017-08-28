@@ -58,7 +58,7 @@ void insert_end(int num)
 		{
 			curr=curr->next;
 		}
-		curr=node;
+		curr->next=node;
 	}
 }
 
