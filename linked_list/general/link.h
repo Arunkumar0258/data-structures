@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 
-#define MAX_LENGTH 10
+#define MAX_LENGTH 20
 
 typedef struct list
 {
@@ -345,7 +346,7 @@ void sortlist()
 
 void writefile(char *filename)
 {
-	char path[20] = "./files/";
+	char path[MAX_LENGTH] = "./files/";
 	strcat(path,filename);
 	
 	FILE *fp;
@@ -362,7 +363,7 @@ void writefile(char *filename)
 void readfile(char *filename)
 {
 	start = NULL;
-	char path[20] = "./files/";
+	char path[MAX_LENGTH] = "./files/";
 	strcat(path,filename);
 	
 	FILE *fp;
@@ -375,5 +376,23 @@ void readfile(char *filename)
 	}
 	
 	fclose(fp);
+}
+
+void listfile()
+{
+	DIR *d = opendir("./files/");
+	struct dirent *dir;
+	if(d)
+	{
+		printf("Current list of files\n");
+		while((dir = readdir(d)) != NULL)
+		{
+			if(strcmp(dir->d_name, "..") == 0 || strcmp(dir->d_name,".") == 0)
+				continue;
+			printf("%s\n",dir->d_name);
+		}
+			
+		closedir(d);
+	}
 }
 

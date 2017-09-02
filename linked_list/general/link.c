@@ -30,7 +30,7 @@ void print()
 	printf("8. Delete a particular value\n");
 	printf("9. Replace a value at a particular node\n");
 	printf("10. Replace a particular value in the list\n");
-	printf("11. Delete all duplicate values\n");
+	printf("11. Delete all duplicate values and sort\n");
 	printf("12. Display\n");
 	printf("13. Reverse\n");
 	printf("14. Sort(Ascending)\n");
@@ -126,6 +126,7 @@ int menu()
 					writefile(filename);
 					break;
 			case 16:
+					listfile();
 					printf("Enter the name of file to read from: ");
 					scanf("%s",filename);
 					readfile(filename);
