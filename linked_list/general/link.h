@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+#define MAX_LENGTH 10
 
 typedef struct list
 {
@@ -25,6 +28,8 @@ void display();
 void reverse();
 void clear(void);
 void sortlist();
+void writefile(char *filename);
+void readfile();
 
 void insert_beg(int num)
 {
@@ -54,10 +59,9 @@ void insert_end(int num)
 	else
 	{
 		curr = start;
-		while(curr->next!=NULL)
-		{
+		while(curr->next != NULL)
 			curr=curr->next;
-		}
+			
 		curr->next=node;
 	}
 }
@@ -337,5 +341,39 @@ void sortlist()
 			}
 		}
 	}
+}
+
+void writefile(char *filename)
+{
+	char path[20] = "./files/";
+	strcat(path,filename);
+	
+	FILE *fp;
+	fp = fopen(path,"w");
+	curr = start;
+	while(curr != NULL)
+	{
+		fprintf(fp,"%d\n",curr->info);
+		curr = curr->next;
+	}
+	fclose(fp);
+}
+
+void readfile(char *filename)
+{
+	start = NULL;
+	char path[20] = "./files/";
+	strcat(path,filename);
+	
+	FILE *fp;
+	int num;
+	fp = fopen(path, "r");
+	while(!feof(fp))
+	{
+		fscanf(fp, "%i\n",&num);
+		insert_end(num);
+	}
+	
+	fclose(fp);
 }
 

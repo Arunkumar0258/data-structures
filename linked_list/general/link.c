@@ -15,7 +15,7 @@ int main()
 	do
 	{	
 		c = menu();
-	}while(c!=15);
+	}while(c!=17);
 }
 
 void print()
@@ -34,18 +34,21 @@ void print()
 	printf("12. Display\n");
 	printf("13. Reverse\n");
 	printf("14. Sort(Ascending)\n");
-	printf("15. Quit\n\n");
+	printf("15. Write to File\n");
+	printf("16. Read from a file\n");
+	printf("17. Quit\n");
 }
 
 int menu()
 {
 	int n,a,b;
+	char *filename = malloc(MAX_LENGTH*sizeof(char));
 	clear();
 	usleep(500000);
 	
 	print();
 	
-	printf("Select the operation you want to perform (15 to Quit): ");
+	printf("Select the operation you want to perform (17 to Quit): ");
 	scanf("%d",&n);
 	
 		switch(n)
@@ -58,19 +61,13 @@ int menu()
 			case 2:
 					printf("Enter the number you want to insert: ");
 					scanf("%d",&a);
-					insert_beg(a);
+					insert_end(a);
 					break;
 			case 3:
 					printf("Enter the number you want to insert: ");
 					scanf("%d",&a);
 					printf("Enter the location in which you want to insert: ");
 					scanf("%d",&b);
-					if(b < 0)
-					{
-						printf("WARNING!!!! Invalid location. Enter value again\n");
-						usleep(800000);
-						break;
-					}
 					insert_at_loc(a,b);
 					break;
 			case 4:
@@ -89,12 +86,6 @@ int menu()
 			case 7:
 					printf("Enter the location of node to delete: ");
 					scanf("%d",&a);
-					if(a < 0)
-					{
-						printf("WARNING!!!! Invalid location. Enter value again\n");
-						usleep(800000);
-						break;
-					}
 					delete_node(a);
 					break;
 			case 8:
@@ -130,6 +121,16 @@ int menu()
 					sortlist();
 					break;
 			case 15:
+					printf("Enter the name of file to write to: ");
+					scanf("%s",filename);
+					writefile(filename);
+					break;
+			case 16:
+					printf("Enter the name of file to read from: ");
+					scanf("%s",filename);
+					readfile(filename);
+					break;
+			case 17:
 					return n;
 					break;
 		}
