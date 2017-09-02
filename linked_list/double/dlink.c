@@ -17,7 +17,7 @@ int main()
 		print();
 		n = menu();
 		
-	}while(n!=15);
+	}while(n!=17);
 	clear();
 }
 
@@ -37,14 +37,18 @@ void print()
 	printf("12. Delete all duplicate values and sort\n");
 	printf("13. Display\n");
 	printf("14. Display in reverse\n");
-	printf("15. Quit\n");
+	printf("15. Write to File\n");
+	printf("16. Read from a File\n");
+	printf("17. Quit\n");
 		
 }
 
 int menu()
 {
 	int n,a,b;
-	printf("Select the operation you want to perform (15 to Quit): ");
+	char *filename = malloc(MAX_LENGTH*sizeof(char));
+	
+	printf("Select the operation you want to perform (17 to Quit): ");
 	scanf("%d",&n);
 	switch(n)
 		{
@@ -117,7 +121,19 @@ int menu()
 					usleep(5000000);
 					break;
 			case 15:
-					return 15;
+					printf("Enter the name of file to write to: ");
+					scanf("%s",filename);
+					writefile(filename);
+					break;
+			case 16:
+					listfile();
+					printf("Enter the name of file to read from: ");
+					scanf("%s",filename);
+					readfile(filename);
+					break;
+			case 17:
+					return n;
+					break;
 		}		
 }
 void clear(void)

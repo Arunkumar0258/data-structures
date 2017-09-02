@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <dirent.h>
+
+#define MAX_LENGTH 20
 
 void insert_beg(int num);
 void insert_end(int num);
@@ -119,9 +123,7 @@ void insert_after_value(int num, int val)
 	{
 		curr = start;
 		while(curr != NULL && curr->info != val)
-		{
 			curr = curr->next;
-		}
 		if(curr == NULL)
 		{
 			printf("Value not found!! Please enter again\n");
@@ -363,5 +365,57 @@ void display_reverse()
 	{
 		printf("%d\n",curr->info);
 		curr = curr->prev;
+	}
+}
+
+void writefile(char *filename)
+{
+	char path[MAX_LENGTH] = "./files/";
+	strcat(path,filename);
+	
+	FILE *fp;
+	fp = fopen(path,"w");
+	curr = start;
+	while(curr != NULL)
+	{
+		fprintf(fp,"%d\n",curr->info);
+		curr = curr->next;
+	}
+	fclose(fp);
+}
+
+void readfile(char *filename)
+{
+	start = NULL;
+	char path[MAX_LENGTH] = "./files/";
+	strcat(path,filename);
+	
+	FILE *fp;
+	int num;
+	fp = fopen(path, "r");
+	while(!feof(fp))
+	{
+		fscanf(fp, "%i\n",&num);
+		insert_end(num);
+	}
+	
+	fclose(fp);
+}
+
+void listfile()
+{
+	DIR *d = opendir("./files/");
+	struct dirent *dir;
+	if(d)
+	{
+		printf("Current list of files\n");
+		while((dir = readdir(d)) != NULL)
+		{
+			if(strcmp(dir->d_name, "..") == 0 || strcmp(dir->d_name,".") == 0)
+				continue;
+			printf("%s\n",dir->d_name);
+		}
+		
+		closedir(d);
 	}
 }
